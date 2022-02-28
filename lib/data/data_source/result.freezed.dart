@@ -24,9 +24,9 @@ class _$ResultTearOff {
     );
   }
 
-  Error<T> error<T>(Exception e) {
+  Error<T> error<T>(String message) {
     return Error<T>(
-      e,
+      message,
     );
   }
 }
@@ -39,19 +39,19 @@ mixin _$Result<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(Exception e) error,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(Exception e)? error,
+    TResult Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(Exception e)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -154,7 +154,7 @@ class _$Success<T> implements Success<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(Exception e) error,
+    required TResult Function(String message) error,
   }) {
     return success(data);
   }
@@ -163,7 +163,7 @@ class _$Success<T> implements Success<T> {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(Exception e)? error,
+    TResult Function(String message)? error,
   }) {
     return success?.call(data);
   }
@@ -172,7 +172,7 @@ class _$Success<T> implements Success<T> {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(Exception e)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -226,7 +226,7 @@ abstract class Success<T> implements Result<T> {
 abstract class $ErrorCopyWith<T, $Res> {
   factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) then) =
       _$ErrorCopyWithImpl<T, $Res>;
-  $Res call({Exception e});
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -240,13 +240,13 @@ class _$ErrorCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
 
   @override
   $Res call({
-    Object? e = freezed,
+    Object? message = freezed,
   }) {
     return _then(Error<T>(
-      e == freezed
-          ? _value.e
-          : e // ignore: cast_nullable_to_non_nullable
-              as Exception,
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -254,14 +254,14 @@ class _$ErrorCopyWithImpl<T, $Res> extends _$ResultCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$Error<T> implements Error<T> {
-  const _$Error(this.e);
+  const _$Error(this.message);
 
   @override
-  final Exception e;
+  final String message;
 
   @override
   String toString() {
-    return 'Result<$T>.error(e: $e)';
+    return 'Result<$T>.error(message: $message)';
   }
 
   @override
@@ -269,12 +269,12 @@ class _$Error<T> implements Error<T> {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is Error<T> &&
-            const DeepCollectionEquality().equals(other.e, e));
+            const DeepCollectionEquality().equals(other.message, message));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(e));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(message));
 
   @JsonKey(ignore: true)
   @override
@@ -285,29 +285,29 @@ class _$Error<T> implements Error<T> {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(T data) success,
-    required TResult Function(Exception e) error,
+    required TResult Function(String message) error,
   }) {
-    return error(e);
+    return error(message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(Exception e)? error,
+    TResult Function(String message)? error,
   }) {
-    return error?.call(e);
+    return error?.call(message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(T data)? success,
-    TResult Function(Exception e)? error,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(e);
+      return error(message);
     }
     return orElse();
   }
@@ -345,9 +345,9 @@ class _$Error<T> implements Error<T> {
 }
 
 abstract class Error<T> implements Result<T> {
-  const factory Error(Exception e) = _$Error<T>;
+  const factory Error(String message) = _$Error<T>;
 
-  Exception get e;
+  String get message;
   @JsonKey(ignore: true)
   $ErrorCopyWith<T, Error<T>> get copyWith =>
       throw _privateConstructorUsedError;
