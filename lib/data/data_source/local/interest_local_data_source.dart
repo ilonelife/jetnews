@@ -24,8 +24,6 @@ class InterestLocalDataSource {
 
       final checkedIdList = interestBox.values.toList();
 
-      print(checkedIdList);
-
       return Result.success(checkedIdList);
     } catch (e) {
       return Result.error('$runtimeType.getcheckedInterestId : 에러 발생 \n$e');
